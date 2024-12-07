@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩详细页</title>
+    <style>
+        
+        .table1
+        {
+            table-layout: fixed;
+            margin-left: 50%;
+            
+        }
+        .table2 {
+            table-layout: fixed;
+            margin: auto;
+        }
+        th, td {
+            width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #lineTd {
+ background: #fff url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxsaW5lIHgxPSIwIiB5MT0iMCIgeDI9IjEwMCUiIHkyPSIxMDAlIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=) no-repeat 100% center;   
+}
+    </style>
+</head>
+<body>
+    <table  border="" class="table2">
+        <tr>
+            <td colspan="4">
+                2024年7月高一期末成绩
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">考号</td>
+            <td colspan="2">{{s_id}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">姓名</td>
+            <td colspan="2">{{name}}</td>
+
+        </tr>
+        <tr>
+            <td colspan="2">班级</td>
+            <td colspan="2">{{s_class}}</td>
+
+        </tr>
+        <tr>
+            <td colspan="2">学校</td>
+            <td colspan="2">禹城一中</td>
+        </tr>
+        <tr>
+            <td colspan="2">原始总分</td>
+            <td colspan="2">{{all_yuan}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">总分</td>
+            <td colspan="2">{{all}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">市名次</td>
+            <td colspan="2">{{mingci_shi}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">校名次</td>
+            <td colspan="2">{{mingci_xiao}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">班名次</td>
+            <td colspan="2">{{mingci_ban}}</td>
+        </tr>
+    </table>
+<table border="" class="table2">
+    <tr>
+        <td id="lineTd"></td>
+        <td>成绩</td>
+        <td>转换</td>
+        <td>名次</td>
+    </tr>
+    <tr>
+        <td>语文</td>
+        <td>{{chinese}}</td>
+        <td></td>
+        <td>{{chinese_m}}</td>
+    </tr>
+    <tr>
+        <td>数学</td>
+        <td>{{math}}</td>
+        <td></td>
+        <td>{{math_m}}</td>
+    </tr>
+    <tr>
+        <td>英语</td>
+        <td>{{english}}</td>
+        <td></td>
+        <td>{{english_m}}</td>
+    </tr>
+    <tr>
+        <td>小语种/{{xiaoyuzhong}}</td>
+        <td>{{xiaoyuzhong_fenshu}}</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>物理</td>
+        <td>{{wuli}}</td>
+        <td>{{wuli_z}}</td>
+        <td>{{wuli_m}}</td>
+    </tr>
+    <tr>
+        <td>化学</td>
+        <td>{{huaxue}}</td>
+        <td>{{huaxue_z}}</td>
+        <td>{{huaxue_m}}</td>
+    </tr>
+    <tr>
+        <td>生物</td>
+        <td>{{shengwu}}</td>
+        <td>{{shengwu_z}}</td>
+        <td>{{shengwu_m}}</td>
+    </tr>
+    <tr>
+        <td>政治</td>
+        <td>{{zhengzhi}}</td>
+        <td>{{zhengzhi_z}}</td>
+        <td>{{zhengzhi_m}}</td>
+    </tr>
+    <tr>
+        <td>历史</td>
+        <td>{{lishi}}</td>
+        <td>{{lishi_z}}</td>
+        <td>{{lishi_m}}</td>
+    </tr>
+    <tr>
+        <td>地理</td>
+        <td>{{dili}}</td>
+        <td>{{dili_z}}</td>
+        <td>{{dili_m}}</td>
+    </tr>
+</table>
+</body>
+</html>

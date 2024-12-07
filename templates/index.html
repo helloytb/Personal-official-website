@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YangTB个人官网</title>
+    <style>
+        * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+            }
+            .container {
+                width: 80%;
+                margin: auto;
+                overflow: hidden;
+                padding: 20px 0;
+            }
+            header {
+                background: #35424a;
+                color: #ffffff;
+                padding-top: 30px;
+                min-height: 70px;
+                border-bottom: #e8491d 3px solid;
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+            }
+            header a {
+                color: #ffffff;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 16px;
+            }
+            header li {
+                float: left;
+                display: inline;
+                padding: 0 20px 0 20px;
+            }
+            header #branding {
+                float: left;
+            }
+            header #branding h1 {
+                margin: 0;
+            }
+            header nav {
+                float: right;
+                margin-top: 10px;
+            }
+            header .highlight, header .current a {
+                color: #e8491d;
+                font-weight: bold;
+            }
+            header a:hover {
+                color: #cccccc;
+                font-weight: bold;
+            }
+            #showcase {
+                min-height: 400px;
+                /* background: url('https://via.placeholder.com/1500x400') no-repeat center center/cover; */
+                /* background:url(image/background2.jpg)  no-repeat center center/cover; */
+                background:url("{{ url_for('static', filename='background2.jpg')}}") no-repeat center center/cover;
+                text-align: center;
+                color: #ffffff;
+                padding-top: 150px;
+            }
+            #showcase h1 {
+                font-size: 55px;
+                margin-bottom: 10px;
+            }
+            #showcase p {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            .button {
+                display: inline-block;
+                font-size: 18px;
+                color: #ffffff;
+                background: #e8491d;
+                padding: 10px 20px;
+                border: none;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            .button:hover {
+                background: #ff6a3c;
+            }
+            #about, #services, #portfolio, #team, #contact {
+                padding: 40px 0;
+            }
+            #about {
+                background: #f4f4f4;
+            }
+            .about-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .about-text {
+                flex: 1;
+                padding-right: 30px;
+            }
+            .about-image {
+                flex: 1;
+            }
+            .about-image img {
+                width: 100%;
+                border-radius: 10px;
+            }
+            #services .services-container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            .service-box {
+                flex-basis: 30%;
+                text-align: center;
+                padding: 20px;
+                margin-bottom: 20px;
+                background: #fff;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+            .service-box img {
+                width: 80px;
+                margin-bottom: 15px;
+            }
+            #portfolio .portfolio-items {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .portfolio-item {
+                flex-basis: 30%;
+                margin-bottom: 30px;
+            }
+            .portfolio-item img {
+                width: 100%;
+                border-radius: 5px;
+            }
+            #team .team-members {
+                display: flex;
+                justify-content: space-between;
+            }
+            .team-member {
+                flex-basis: 22%;
+                text-align: center;
+            }
+            .team-member img {
+                width: 100%;
+                border-radius: 50%;
+                margin-bottom: 15px;
+            }
+            #contact form {
+                display: flex;
+                flex-direction: column;
+            }
+            #contact form input, #contact form textarea {
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #ddd;
+            }
+            footer {
+                background: #35424a;
+                color: #ffffff;
+                text-align: center;
+                padding: 20px 0;
+            }
+    
+            /* 动画效果相关的CSS */
+            .fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            }
+            .fade-in.appear {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            @keyframes slideInFromLeft {
+                0% {
+                    transform: translateX(-100%);
+                }
+                100% {
+                    transform: translateX(0);
+                }
+            }
+            .slide-in-left {
+                animation: 1s ease-out 0s 1 slideInFromLeft;
+            }
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .pulse {
+                animation: pulse 2s infinite;
+            }
+            .service-box {
+                transition: transform 0.3s ease-in-out;
+            }
+            .service-box:hover {
+                transform: translateY(-10px);
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+           /* From Uiverse.io by Allyhere */ 
+            .btn-donate {
+            --clr-font-main: hsla(0 0% 20% / 100);
+            --btn-bg-1: hsla(194 100% 69% / 1);
+            --btn-bg-2: hsla(217 100% 56% / 1);
+            --btn-bg-color: hsla(360 100% 100% / 1);
+            --radii: 0.5em;
+            cursor: pointer;
+            padding: 0.9em 1.4em;
+            min-width: 120px;
+            min-height: 44px;
+            font-size: var(--size, 1rem);
+            font-weight: 500;
+            transition: 0.8s;
+            background-size: 280% auto;
+            background-image: linear-gradient(
+                325deg,
+                var(--btn-bg-2) 0%,
+                var(--btn-bg-1) 55%,
+                var(--btn-bg-2) 90%
+            );
+            border: none;
+            border-radius: var(--radii);
+            color: var(--btn-bg-color);
+            box-shadow:
+                0px 0px 20px rgba(71, 184, 255, 0.5),
+                0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+                inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+                inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+            }
+
+            .btn-donate:hover {
+            background-position: right top;
+            }
+
+            .btn-donate:is(:focus, :focus-visible, :active) {
+            outline: none;
+            box-shadow:
+                0 0 0 3px var(--btn-bg-color),
+                0 0 0 6px var(--btn-bg-2);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+            .btn-donate {
+                transition: linear;
+            }
+            }
+            .a-link{
+                font-size: 16px;
+            }
+            .download-link{
+                margin-top: 5%;
+                color: #2e92d4;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">YangTB</span> 个人官网</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#home">首页</a></li>
+                    <li><a href="#about">关于作者</a></li>
+                    <li><a href="#portfolio">案例</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="showcase">
+        <div class="container">
+            <h1 class="fade-in">专业的网络解决方案</h1>
+            <p class="fade-in">我们提供高质量的网络服务，帮助您的业务在数字时代蓬勃发展。</p>
+            <a href="#contact" class="button pulse">联系我们</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="fade-in">关于作者</h2>
+            <div class="about-content slide-in-left">
+                <div class="about-text">
+                    <p>YangTB，高中学生，就读于禹城市第一中学，对编程充满热情，熟练掌握Python、JavaScript和C++等编程语言。</p>
+                    <p>主修课程：计算机科学、物理、化学、生物等</p>
+                    <ul>
+                        <li class="">编程语言：Python、JavaScript、C++</li>
+                        <li class="">开发工具：熟悉使用Visual Studio Code、Pycharm、Git等开发环境和版本控制工具</li>
+                        <li class="">项目经验：参与多个小型编程项目，包括:成绩查询系统、U盘数据截留、QQ签到自动化、微信自动回复等</li>
+                    </ul>
+                    
+                </div>
+                <div class="about-image">
+                    <!-- <img src="https://via.placeholder.com/500x300" alt="关于我们"> -->
+                    <!-- <img src="image/ytb.jpg" alt="关于我们"> -->
+                    <img src="{{ url_for('static', filename='/ytb.jpg')}}" alt="关于我们">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services">
+        <div class="container">
+            <h2 class="fade-in">我们的服务</h2>
+            <div class="services-container">
+                <div class="service-box fade-in">
+                    <!-- <img src="image/1.png" alt="网页设计"> -->
+                    <img src="{{ url_for('static', filename='/1.png')}}" alt="网页设计">
+                    <h3>网页设计</h3>
+                    <p>我们创造美观实用的网站，助力您的在线形象。从响应式设计到用户体验优化，我们都能满足您的需求。</p>
+                </div>
+                <div class="service-box fade-in">
+                    <img src="{{ url_for('static', filename='/2.png')}}" alt="移动应用开发">
+                    <h3>移动应用开发</h3>
+                    <p>专业的移动应用开发团队，为您打造iOS和Android平台的高性能应用，让您的业务触手可及。</p>
+                </div>
+                <div class="service-box fade-in">
+                    <img src="{{ url_for('static', filename='/3.png')}}" alt="数字营销">
+                    <h3>小型爬虫程序</h3>
+                    <p>自动化地访问网页，提取特定信息，并将这些信息保存到文件或数据库中</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="fade-in">成功案例</h2>
+            <div class="portfolio-items">
+                <div class="portfolio-item fade-in">
+                    <img src="{{ url_for('static', filename='/web.png')}}" alt="项目1">
+                    <!-- <h3>学生成绩查询系统</h3> -->
+                    <a href="./search" target="_blank" class="a-link">学生成绩查询系统</a>
+
+                    <p>用于学生查看、分析学业成绩的网络工具</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="">
+        <div class="container" >
+             <div ><!--class="portfolio-items" -->
+                <div align="center"><!-- class="portfolio-item fade-in" -->
+                        
+                    
+                    <button class="btn-donate"  onclick="window.location.href='./game'">进入小游戏</button>
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="fade-in">联系我们</h2>
+            <form class="fade-in" action="/" method="post">
+                <input type="text" placeholder="您的姓名" name="name">
+                <input type="email" placeholder="您的邮箱" name="email">
+                <input type="tel" placeholder="您的电话" name="tel">
+                <textarea placeholder="您的留言" rows="5" name="word"></textarea>
+                <button type="submit" class="button">发送消息</button>
+            </form>
+            <div class="download-link">
+                <a onclick="window.location.href='./download'">点击下载App</a>
+            </div>
+            
+
+        </div>
+        
+    </section>
+    
+    
+    <footer>
+        <div class="container">
+            <p>YangTB &copy; 2024 | 电话: (还是聊QQ吧) | QQ: 2126834618</p>
+            <img src="{{ url_for('static', filename='/ytb.png')}}" alt="关于我们" width="100" height="25" >
+        </div>
+    </footer>
+</body>
+<script>
+    // 淡入效果
+    const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -100px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('appear');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // 为导航添加平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+</script>
+<script type="text/javascript">
+    var phoneWidth =  parseInt(window.screen.width);
+    var phoneScale = phoneWidth/640;
+    var ua = navigator.userAgent;
+    if (/Android (\d+\.\d+)/.test(ua)){
+        var version = parseFloat(RegExp.$1);
+        if(version>2.3){
+            document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+        }else{
+            document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+        }
+    } else {
+        document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+    }
+</script>
+</html>
+
+
